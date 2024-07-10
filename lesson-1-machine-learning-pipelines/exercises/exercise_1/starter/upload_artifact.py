@@ -16,11 +16,13 @@ def go(args):
     # Create a W&B run in the project ``exercise_1``. Set the option ``job_type="upload_file"``:
     run = wandb.init(project = 'exercise_1', job_type = 'upload_file')
 
-    artifact = wandb.Artifact(name = artifact_name,
-                              type = artifact_type, 
-                              description = artifact_desc)
-    
-    artifact.add_file(input_file)
+    logger.info("Creating Artifact")
+    artifact = wandb.Artifact(name = args.artifact_name,
+                              type = args.artifact_type, 
+                              description = args.artifact_desc)
+
+    logger.info("Logging Artifact into W&B")
+    artifact.add_file(args.input_file)
     run.log_artifact(artifact)
 
 
